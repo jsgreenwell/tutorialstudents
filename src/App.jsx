@@ -6,9 +6,9 @@ import React, {Fragment} from "react";
 
 // To use a fragment we'll 2 arrays
 const Profiles = [
-    {img: adaLovelace, blurb: "First Programmer", name: "Ada", sizechange: "normal"},
-    {img: jonhall, blurb: "Chair of Linux Board", name: "Jon", sizechange: "img-large"},
-    {img: alanturing, blurb: "Father of Modern Computing", name: "Alan", sizechange: "img-small"},
+    {img: adaLovelace, blurb: "First Programmer", name: "Ada", sizechange: "normal", votes: 0},
+    {img: jonhall, blurb: "Chair of Linux Board", name: "Jon", sizechange: "img-large", votes: 0},
+    {img: alanturing, blurb: "Father of Modern Computing", name: "Alan", sizechange: "img-small", votes: 0},
 ]
 
 function Profile({ item }) {
@@ -18,6 +18,7 @@ function Profile({ item }) {
 
     // We don't need if when we can just set the value so remove the if/else if/else
     // We can also just Vote for a person so add the vote & state call (add 1 to vote)
+    Profiles[item].votes += 1;
     return (
         <div className="card">
             <img src={Profiles[item].img} alt="test" className={Profiles[item].sizechange} />
@@ -45,9 +46,22 @@ function AllItems() {
     //return ([Array(Profiles.length)].map((_, i) => <Profile item={i} />));
 }
 
+function AlertButton({message, children}) {
+    // children is a special control
+    return (
+        <button onClick={() => alert(message)}>
+            {children}
+        </button>
+    )
+}
+
 export default function App() {
   return (
     <>
+      <AlertButton message="Stop pressing me!">
+          Don't click me
+      </AlertButton>
+
       <h1>Profile</h1>
         <AllItems />
     </>
